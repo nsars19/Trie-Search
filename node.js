@@ -1,4 +1,5 @@
-function TrieNode(val) {
+function TrieNode(key, val = []) {
+  this.key = key;
   this.val = val;
   this.children = {};
 }
