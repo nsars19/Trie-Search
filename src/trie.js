@@ -44,6 +44,24 @@ Trie.prototype.map = function (key, value) {
   curr.val = curr.val.concat(value);
 };
 
+Trie.prototype.delete = function (data) {
+  data = data.toLowerCase();
+  let curr = this;
+
+  for (const char of data) {
+    if (curr.children[char]) {
+      curr = curr.children[char];
+    }
+  }
+
+  if (curr.val.includes(data)) {
+    const idx = curr.val.indexOf(data);
+    return curr.val.splice(idx, 1);
+  } else {
+    return [];
+  }
+};
+
 Trie.prototype.search = function (data) {
   const first = data[0];
   const vals = [];
