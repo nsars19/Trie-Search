@@ -55,8 +55,11 @@ Trie.prototype.delete = function (data) {
   }
 
   if (curr.val.includes(data)) {
-    const idx = curr.val.indexOf(data);
-    return curr.val.splice(idx, 1);
+    while (curr.val.includes(data)) {
+      const idx = curr.val.indexOf(data);
+      curr.val.splice(idx, 1);
+    }
+    return [];
   } else {
     return [];
   }
