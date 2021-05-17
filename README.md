@@ -34,6 +34,6 @@ Trie.search("hello");
 
 // To delete a node and its children, pass its key as an argument to the deleteNode method.
 Trie.add(["meat", "me", "mean", "mat"]);
-Trie.delete("me");
+Trie.deleteNode("me");
 // [ 'mat' ]
 ```
