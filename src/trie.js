@@ -27,6 +27,7 @@ Trie.prototype.add = function (data) {
 };
 
 Trie.prototype.map = function (key, value) {
+  if (!value) return;
   key = key.toLowerCase();
   let curr = this;
 
