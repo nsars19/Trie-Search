@@ -10,7 +10,7 @@ describe("Trie", () => {
   test("adds properly", () => {
     const trie = new Trie();
     trie.add("Hi");
-    const childVal = trie.children["h"].children["i"].val;
+    const childVal = trie.children["h"].children["i"].val[0];
     expect(childVal).toBe("Hi");
   });
 });
