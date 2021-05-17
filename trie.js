@@ -24,6 +24,23 @@ Trie.prototype.add = function (data) {
   curr.val = curr.val.concat(data);
 };
 
+Trie.prototype.map = function (key, value) {
+  key = key.toLowerCase();
+  let curr = this;
+
+  for (const char of key) {
+    if (curr.children[char]) {
+      curr = curr.children[char];
+    } else {
+      const nodeKey = curr.key ? curr.key + char : char;
+      curr.children[char] = new TrieNode(nodeKey);
+      curr = curr.children[char];
+    }
+  }
+
+  curr.val = curr.val.concat(value);
+};
+
 Trie.prototype.search = function (data) {
   const first = data[0];
   const vals = [];
