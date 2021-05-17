@@ -6,10 +6,10 @@ function Trie() {
 }
 
 Trie.prototype.add = function (data) {
-  data = data.toLowerCase();
   let curr = this;
 
-  for (const char of data) {
+  for (let char of data) {
+    char = char.toLowerCase();
     // If the child node already exists we skip the letter
     if (curr.children[char]) {
       curr = curr.children[char];
