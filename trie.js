@@ -25,14 +25,19 @@ Trie.prototype.add = function (data) {
 };
 
 Trie.prototype.search = function (data) {
+  const first = data[0];
+  const vals = [];
   let curr = this;
-  let node;
+
+  if (!curr.children[first]) return vals;
 
   for (const char of data) {
     if (curr.children[char]) {
       curr = curr.children[char];
     }
   }
+
+  return addChildVals(curr, vals);
 };
 
 module.exports = Trie;
