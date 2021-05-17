@@ -14,11 +14,13 @@ Trie.prototype.add = function (data) {
       curr = curr.children[char];
     } else {
       // Build on top of preexisting nodes
-      const val = curr.val ? curr.val + char : char;
-      curr.children[char] = new TrieNode(val);
+      const key = curr.key ? curr.key + char : char;
+      curr.children[char] = new TrieNode(key);
       curr = curr.children[char];
     }
   }
+
+  curr.val = curr.val.concat(data);
 };
 
 Trie.prototype.search = function (data) {
