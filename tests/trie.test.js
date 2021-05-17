@@ -7,11 +7,18 @@ describe("Trie", () => {
     expect(typeof trie).toBe("object");
   });
 
-  test("adds properly", () => {
+  test("adds strings", () => {
     const trie = new Trie();
     trie.add("Hi");
     const childVal = trie.children["h"].children["i"].val[0];
     expect(childVal).toBe("Hi");
+  });
+
+  test("adds strings from an array", () => {
+    const trie = new Trie();
+    const words = ["a", "apple", "awesome", "android"];
+    trie.add(words);
+    expect(trie.search("a")).toEqual(words);
   });
 
   test("searches for values", () => {
