@@ -45,12 +45,36 @@ describe("Trie", () => {
     expect(trie.search("hello")).toEqual(["world", "hello there"]);
   });
 
-  test("deletes values", () => {
+  test("deletes added values", () => {
     const trie = new Trie();
     trie.add("spaghetti");
     expect(trie.search("spaghet")).toEqual(["spaghetti"]);
     expect(trie.delete("spaghetti")).toEqual([]);
     expect(trie.search("spaghet")).toEqual([]);
+  });
+
+  test("deletes mapped values", () => {
+    const trie = new Trie();
+    trie.map("Hello", "there");
+    trie.map("Hello", "world");
+    trie.delete("hello");
+    expect(trie.search("hello")).toEqual([]);
+  });
+
+  test("prunes deleted values", () => {
+    const trie = new Trie();
+    trie.map("Hello", "there");
+    trie.map("Hello", "world");
+    trie.delete("hello");
+    expect(trie.children).toEqual({});
+  });
+
+  test("it doesn't prune existing values", () => {
+    const trie = new Trie();
+    trie.add("meat");
+    trie.add("meatball");
+    trie.delete("meat");
+    expect(trie.search("m")).toEqual(["meatball"]);
   });
 
   test("returns an empty array when attempting to delete a missing value", () => {
@@ -64,18 +88,16 @@ describe("Trie", () => {
   test("removes branch until it hits a node containing a value", () => {
     const trie = new Trie();
     ["ham", "hamster"].forEach((word) => trie.add(word));
-    trie.deleteFull("hamster");
-    expect(trie.search("h")).toEqual(["ham"]);
+    trie.delete("hamster");
+    trie.prune("hamster");
+    const childVal = trie.children["h"].children["a"].children["m"].children;
+    expect(childVal).toEqual({});
   });
 
   test("deletes duplicates", () => {
     const trie = new Trie();
     ["ham", "ham"].forEach((word) => trie.add(word));
     trie.delete("ham");
-    expect(trie.search("h")).toEqual([]);
-
-    ["ham", "ham"].forEach((word) => trie.add(word));
-    trie.deleteFull("ham");
     expect(trie.search("h")).toEqual([]);
   });
 });
