@@ -1,5 +1,5 @@
 {
-  "name": "trie",
+  "name": "simple-trie-search",
   "version": "1.0.0",
   "description": "A trie implementation",
   "main": "src/trie.js",
@@ -13,6 +13,11 @@
   "scripts": {
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nsars19/Trie-Search"
+  },
+  "homepage": "https://github.com/nsars19/Trie-Search#readme",
   "author": "",
   "license": "ISC"
 }
