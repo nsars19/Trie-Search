@@ -17,6 +17,10 @@
     "type": "git",
     "url": "https://github.com/nsars19/Trie-Search"
   },
+  "keywords": [
+    "trie",
+    "tree"
+  ],
   "homepage": "https://github.com/nsars19/Trie-Search#readme",
   "author": "",
   "license": "ISC"
