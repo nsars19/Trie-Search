@@ -65,6 +65,36 @@ Trie.prototype.delete = function (data) {
   }
 };
 
+Trie.prototype.deleteFull = function (data) {
+  data = data.toLowerCase();
+  let curr = this;
+  let prev;
+  let charKey;
+
+  for (const char of data) {
+    if (curr.children[char]) {
+      prev = curr;
+      charKey = char;
+      curr = curr.children[char];
+    }
+  }
+
+  if (curr.root || !curr.isLeaf()) {
+    if (!curr.root) curr.val = [];
+    return;
+  }
+
+  if (curr.val.includes(data)) {
+    delete prev.children[charKey];
+  } else if (curr.val.length > 0) {
+    return;
+  }
+
+  delete prev.children[charKey];
+
+  this.deleteFull(data);
+};
+
 Trie.prototype.search = function (data) {
   const first = data[0];
   const vals = [];
