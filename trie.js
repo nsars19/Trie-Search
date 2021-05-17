@@ -6,6 +6,7 @@ function Trie() {
 }
 
 Trie.prototype.add = function (data) {
+  data = data.toLowerCase();
   let curr = this;
 
   for (const char of data) {
