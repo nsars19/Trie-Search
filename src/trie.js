@@ -54,7 +54,9 @@ Trie.prototype.delete = function (data) {
     }
   }
 
-  return (curr.val = []);
+  curr.val = [];
+  this.prune(data);
+  return [];
 };
 
 Trie.prototype.prune = function (data) {
@@ -72,17 +74,12 @@ Trie.prototype.prune = function (data) {
   }
 
   if (curr.root || !curr.isLeaf()) {
-    if (!curr.root) curr.val = [];
     return;
-  }
-
-  if (curr.val.includes(data)) {
-    delete prev.children[charKey];
   } else if (curr.val.length > 0) {
     return;
+  } else {
+    delete prev.children[charKey];
   }
-
-  delete prev.children[charKey];
 
   this.prune(data);
 };
