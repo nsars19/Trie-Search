@@ -100,4 +100,11 @@ describe("Trie", () => {
     trie.delete("ham");
     expect(trie.search("h")).toEqual([]);
   });
+
+  test("deletes nodes", () => {
+    const trie = new Trie();
+    ["me", "mean", "mat"].forEach((word) => trie.add(word));
+    trie.deleteNode("me");
+    expect(trie.search("m")).toEqual(["mat"]);
+  });
 });
