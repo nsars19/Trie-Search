@@ -1,7 +1,7 @@
 const TrieNode = require("./node");
 
 function Trie() {
-  this.root = null;
+  this.root = true;
   this.children = {};
 }
 
