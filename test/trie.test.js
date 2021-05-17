@@ -13,4 +13,69 @@ describe("Trie", () => {
     const childVal = trie.children["h"].children["i"].val[0];
     expect(childVal).toBe("Hi");
   });
+
+  test("searches for values", () => {
+    const trie = new Trie();
+    const words = ["ace", "aced", "actor", "alfredo", "balloons"];
+    words.forEach((word) => trie.add(word));
+
+    expect(trie.search("a")).toEqual(["ace", "aced", "actor", "alfredo"]);
+    expect(trie.search("ac")).toEqual(["ace", "aced", "actor"]);
+    expect(trie.search("act")).toEqual(["actor"]);
+  });
+
+  test("maps values to a key", () => {
+    const trie = new Trie();
+    trie.map("Hello", "World");
+    trie.map("Hello", "There");
+    expect(trie.search("hello")).toEqual(["World", "There"]);
+  });
+
+  test("doesn't map empty strings", () => {
+    const trie = new Trie();
+    trie.add("");
+    expect(trie.children).toEqual({});
+  });
+
+  test("maps & adds properly", () => {
+    const trie = new Trie();
+    trie.add("hello there");
+    trie.map("hello", "world");
+
+    expect(trie.search("hello")).toEqual(["world", "hello there"]);
+  });
+
+  test("deletes values", () => {
+    const trie = new Trie();
+    trie.add("spaghetti");
+    expect(trie.search("spaghet")).toEqual(["spaghetti"]);
+    expect(trie.delete("spaghetti")).toEqual([]);
+    expect(trie.search("spaghet")).toEqual([]);
+  });
+
+  test("returns an empty array when attempting to delete a missing value", () => {
+    const trie = new Trie();
+    trie.add("meatball");
+    expect(trie.delete("meat")).toEqual([]);
+    expect(trie.delete("meatbal")).toEqual([]);
+    expect(trie.search("m")).toEqual(["meatball"]);
+  });
+
+  test("removes branch until it hits a node containing a value", () => {
+    const trie = new Trie();
+    ["ham", "hamster"].forEach((word) => trie.add(word));
+    trie.deleteFull("hamster");
+    expect(trie.search("h")).toEqual(["ham"]);
+  });
+
+  test("deletes duplicates", () => {
+    const trie = new Trie();
+    ["ham", "ham"].forEach((word) => trie.add(word));
+    trie.delete("ham");
+    expect(trie.search("h")).toEqual([]);
+
+    ["ham", "ham"].forEach((word) => trie.add(word));
+    trie.deleteFull("ham");
+    expect(trie.search("h")).toEqual([]);
+  });
 });
