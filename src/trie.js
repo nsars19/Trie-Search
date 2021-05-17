@@ -57,7 +57,7 @@ Trie.prototype.delete = function (data) {
   return (curr.val = []);
 };
 
-Trie.prototype.deleteFull = function (data) {
+Trie.prototype.prune = function (data) {
   data = data.toLowerCase();
   let curr = this;
   let prev;
@@ -84,7 +84,7 @@ Trie.prototype.deleteFull = function (data) {
 
   delete prev.children[charKey];
 
-  this.deleteFull(data);
+  this.prune(data);
 };
 
 Trie.prototype.search = function (data) {
