@@ -6,6 +6,8 @@ function Trie() {
 }
 
 Trie.prototype.add = function (data) {
+  if (!data) return;
+
   let curr = this;
 
   for (let char of data) {
