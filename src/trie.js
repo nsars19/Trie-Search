@@ -59,6 +59,23 @@ Trie.prototype.delete = function (data) {
   return [];
 };
 
+Trie.prototype.deleteNode = function (data) {
+  data = data.toLowerCase();
+  let curr = this;
+  let prev;
+  let charKey;
+
+  for (const char of data) {
+    if (curr.children[char]) {
+      prev = curr;
+      charKey = char;
+      curr = curr.children[char];
+    }
+  }
+
+  delete prev.children[charKey];
+};
+
 Trie.prototype.prune = function (data) {
   data = data.toLowerCase();
   let curr = this;
