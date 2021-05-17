@@ -54,15 +54,7 @@ Trie.prototype.delete = function (data) {
     }
   }
 
-  if (curr.val.includes(data)) {
-    while (curr.val.includes(data)) {
-      const idx = curr.val.indexOf(data);
-      curr.val.splice(idx, 1);
-    }
-    return [];
-  } else {
-    return [];
-  }
+  return (curr.val = []);
 };
 
 Trie.prototype.deleteFull = function (data) {
