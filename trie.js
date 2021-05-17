@@ -40,4 +40,17 @@ Trie.prototype.search = function (data) {
   return addChildVals(curr, vals);
 };
 
+function addChildVals(node, vals) {
+  if (node.val.length) vals.push(...node.val);
+
+  if (node.isLeaf()) return vals;
+
+  for (let key in node.children) {
+    const child = node.children[key];
+    addChildVals(child, vals);
+  }
+
+  return vals;
+}
+
 module.exports = Trie;
