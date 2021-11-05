@@ -5,35 +5,38 @@ import Trie from "simple-trie-search";
 // OR
 const Trie = require("simple-trie-search");
 
+// Instantiate a Trie object
+const trie = new Trie()
+
 // Add words by passing in a String, or by passing an Array.
-Trie.add("hello");
-Trie.search("h");
+trie.add("hello");
+trie.search("h");
 // [ 'Hello' ]
 
-Trie.add("help");
-Trie.search("he");
+trie.add("help");
+trie.search("he");
 // [ 'help', 'hello' ]
 
-Trie.add(["a", "list", "of", "words"]);
+trie.add(["a", "list", "of", "words"]);
 
 // Values can be mapped to keys as well.
 // Map values can be of any type.
-Trie.map("keyword", "value");
-Trie.search("key");
+trie.map("keyword", "value");
+trie.search("key");
 // [ 'value' ]
 
-Trie.map("hello", { world: "world", there: "there" });
-Trie.search("hello");
+trie.map("hello", { world: "world", there: "there" });
+trie.search("hello");
 // [{ world: 'world', there: 'there' }]
 
 // To delete a value, pass that value as an argument to the delete method.
-Trie.add("hello");
-Trie.delete("hello");
-Trie.search("hello");
+trie.add("hello");
+trie.delete("hello");
+trie.search("hello");
 // [ ]
 
 // To delete a node and its children, pass its key as an argument to the deleteNode method.
-Trie.add(["meat", "me", "mean", "mat"]);
-Trie.deleteNode("me");
+trie.add(["meat", "me", "mean", "mat"]);
+trie.deleteNode("me");
 // [ 'mat' ]
 ```
